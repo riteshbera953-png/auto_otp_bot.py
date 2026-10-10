@@ -8,7 +8,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 
 # ===== CONFIG =====
 BOT_TOKEN = "8681990378:AAFbGpzsTXc7dBsl02aQQxk7iqsR64kCRz8"  # COMPROMISED
-ADMIN_ID = 123456789  # Replace with your Telegram ID
+ADMIN_ID =  5999496406 # Replace with your Telegram ID
 FIREBASE_DB_FILE = "firebase_links.json"
 TARGET_URL = "https://cyberking-1.online/index.php"
 SESSIONS = {}  # Per-Firebase session
